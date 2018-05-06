@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			button {
+				margin: 5px;
+			}
+			div[data-status='done'] span{
+				text-decoration:line-through;
+			}
+		</style>
+		<script defer>
+			function makeThrough(event) {
+				let button = event.currentTarget;
+				button.parentNode.setAttribute("data-status", "done");
+			}
+		</script>
+	</head>
+	<body>
+		<div id="tasks">
+			<div><button onclick="makeThrough(event)">Finish</button><span>Finish web tasks</span></div>
+			<div><button onclick="makeThrough(event)">Finish</button><span>Go to gym</span></div>
+			<div><button onclick="makeThrough(event)">Finish</button><span>Clean home</span></div>
+			<div><button onclick="makeThrough(event)">Finish</button><span>Start project</span></div>
+			<div><button onclick="makeThrough(event)">Finish</button><span>Prepare to calculus</span></div>
+		</div>
+	</body>
+</html>

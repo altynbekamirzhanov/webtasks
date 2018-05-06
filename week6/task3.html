@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			#cars {
+				display:flex;
+				flex-wrap:wrap;
+				width: 630px;
+				margin: 10px auto;
+			}
+			.card {
+				position:relative;
+				width: 200px;
+				height: 150px;
+				margin:5px;
+			}
+			.car{
+				width: 200px;
+				height: 150px;
+			}
+			.card .basket {
+				background-color:white;
+				position:absolute;
+				width:32px;
+				right:5px;
+				top:5px;
+				z-index:9;
+			}
+			#insideBasket {
+				border:1px solid red;
+				text-align:center;
+			}
+		</style>
+		<script defer>
+			let cars = [{brand:'Toyota',model:'Camry','year':1999,'price':20000},{brand:'BMW',model:'X6',year:2014,price:25000},{brand:'Daewoo',model:'Nexia',year:2007,price:15000}];
+			function toBuy(id) {
+				let car = cars[id];
+				let items = parseInt(document.getElementById('items').textContent);
+				let sum = parseInt(document.getElementById('sum').textContent);
+				let img = document.getElementById(''+id);
+				if (img.getAttribute("status") == "sell") {
+					items++;
+					sum += car.price;
+					img.src = 'Images/buy.png';
+					img.setAttribute("status", "buy");
+				}
+				else {
+					items--;
+					sum -= car.price;
+					img.src = 'Images/sell.png';
+					img.setAttribute("status", "sell");
+				}
+				document.getElementById('items').textContent = items;
+				document.getElementById('sum').textContent = sum;
+			}
+		</script>
+	</head>
+	<body>
+		<div id="insideBasket"><span id="items">0</span> items, total: <span id="sum">0</span>$</div>
+		<div id="cars">
+			<div class="card">
+				<img class="car" src="Images/toyota_camry.jpg"/>
+				<img class="basket" status="sell" src="Images/sell.png" id="0" onClick="toBuy(0)"/>
+				<p>Toyota Camry</p>
+			</div>
+			<div class="card">
+				<img class="car" src="Images/bmw_x6.jpg"/>
+				<img class="basket" status="sell" src="Images/sell.png" id="1" onClick="toBuy(1)"/>
+				<p>BMW X6</p>
+			</div>
+			<div class="card">
+				<img class="car" src="Images/daewoo_nexia.jpg"/>
+				<img class="basket" status="sell" src="Images/sell.png" id="2" onClick="toBuy(2)"/>
+				<p>Daewoo Nexia</p>
+			</div>
+		</div>
+	</body>
+</html>

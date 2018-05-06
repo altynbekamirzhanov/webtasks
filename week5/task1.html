@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<style>
+			body {
+				width: 450px;
+				margin: 100px auto;
+				font-family: "Robo" Sans-serif;
+			}
+			div {
+				margin: 0;
+			}
+			input {
+				width: 150px;
+				height: 40px;
+				margin: -1 -3px;
+				font-size: 20px;
+				text-align: center;
+				border: 1px solid black;
+			}
+			button {
+				width: 150px;
+				font-size: 24px;
+				border-radius: 5px;
+				margin: 10px 145px;
+				color: rgb(0, 210, 0);
+			}
+			text {
+				font-size: 24px;
+				color: red;
+			}
+		</style>
+		<script defer>
+			function calculate() {
+				let int1 = parseInt(document.getElementById('1').value);
+				let int2 = parseInt(document.getElementById('2').value);
+				let int3 = parseInt(document.getElementById('3').value);
+				let int4 = parseInt(document.getElementById('4').value);
+				let int5 = parseInt(document.getElementById('5').value);
+				let int6 = parseInt(document.getElementById('6').value);
+				let int7 = parseInt(document.getElementById('7').value);
+				let int8 = parseInt(document.getElementById('8').value);
+				let int9 = parseInt(document.getElementById('9').value);
+				let determinant = int1 * (int5*int9 - int6*int8) - int2 * (int4*int9 - int6*int7) + int3 * (int4*int8 - int5*int7);
+				
+				document.getElementById('text').innerHTML = determinant;
+			}
+		</script>
+	</head>
+	<body>
+		<div>
+			<input type="text" id="1" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+			<input type="text" id="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+			<input type="text" id="3" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+		</div>
+		
+		<div>
+			<input type="text" id="4" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+			<input type="text" id="5" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+			<input type="text" id="6" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+		</div>
+		
+		<div>
+			<input type="text" id="7" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+			<input type="text" id="8" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+			<input type="text" id="9"onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+		</div>
+		<button onClick="calculate();">Calculate</button>
+		<text id="text">0</text>
+	</body>
+</html>

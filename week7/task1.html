@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<style>
+		#main {
+			width: 400px;
+			margin: 50px auto;
+		}
+		#news{
+			width:372px;
+			height:300px;
+			margin: 10px 0;
+			padding: 0 10px;
+			border:1px solid red;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<div id="news"></div>
+			<button id="0">Load Sport news</button>
+			<button id="1">Load Politics news</button>
+			<button id="2">Load Bussiness news</button>
+		</div>
+		<script>
+			let links = ['http://demo4296963.mockable.io/news-sport', 'http://demo4296963.mockable.io/news-politics', 'http://demo4296963.mockable.io/news-bussiness'];
+			
+			function onStreamProcessed(text) {
+				document.getElementById('news').innerHTML = text;
+			}
+			
+			function onSuccess(response) {
+				response.text().then(onStreamProcessed);
+			}
+			function onError(error) {
+				alert(error);
+			}
+			
+			function call(event) {
+				let x = event.currentTarget;
+				let index = parseInt(x.getAttribute('id'));
+				fetch(links[index]).then(onSuccess, onError);
+			}
+			
+			document.getElementById('0').addEventListener('click', call);
+			document.getElementById('1').addEventListener('click', call);
+			document.getElementById('2').addEventListener('click', call);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,43 @@
+<html>
+	<head>
+		<style>
+			body {
+				margin: 10px 0;
+			}
+			#main {
+				display: block;
+				width: 700px;
+				margin: auto;
+			}
+			div {
+				width: 1000px;
+				margin: 10px auto;
+			}
+			img {
+				width: 200px;
+				margin: 0 -2px;
+			}
+		</style>
+		<script defer>
+			function onClick(id) {
+				let src = "Images/porsche" + id + ".jpg";
+				document.getElementById('main').src= src;
+			}
+		</script>
+	</head>
+	<body>
+		<img src="Images/porsche1.jpg" id="main"/>
+		<div>
+			<img src="Images/porsche1.jpg" onclick="onClick(1);" />
+			<img src="Images/porsche2.jpg" onclick="onClick(2);" />
+			<img src="Images/porsche3.jpg" onclick="onClick(3);" />
+			<img src="Images/porsche4.jpg" onclick="onClick(4);" />
+			<img src="Images/porsche5.jpg" onclick="onClick(5);" />
+			<img src="Images/porsche6.jpg" onclick="onClick(6);" />
+			<img src="Images/porsche7.jpg" onclick="onClick(7);" />
+			<img src="Images/porsche8.jpg" onclick="onClick(8);" />
+			<img src="Images/porsche9.jpg" onclick="onClick(9);" />
+			<img src="Images/porsche10.jpg" onclick="onClick(10);" />
+		</div>
+	</body>
+</html>

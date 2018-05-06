@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+		#cards .card{
+			width:278px;
+			display:flex;
+			padding: 10px;
+			border:1px solid red;
+		}
+		#cards .card .title{
+			flex-grow: 1;
+		}
+		#cards .card .price{
+			font-weight: bold;
+		}
+		#loading{
+			display: none;
+		}
+		#cards{
+			margin: 5px 0;
+			border: 1px solid blue;
+		}
+		#cards, img {
+			width:300px;
+			height:200px;
+		}
+		</style>
+	</head>
+	<body>
+		<div style="margin: 5px 0;">
+			<button id="buttonLoad">Load</button>
+		</div>
+		<button id="buttonSortByMaker">Sort by Maker</button>
+		<button id="buttonSortByPrice">Sort by Price</button>
+		<div id="cards">
+			<img id="loading" src="loading.gif"/>
+		</div>
+		<script>
+			var list = null;
+			function onStreamProcessed(responses) {
+				list = responses;
+				process(list);
+			}
+			
+			function process(arrays) {
+				const cards = document.getElementById('cards');
+				cards.innerHTML = '';
+				for (let array of arrays) {
+					let card = document.createElement('div');
+					let title = document.createElement('span');
+					let price = document.createElement('span');
+					card.setAttribute('class', 'card');
+					title.setAttribute('class', 'title');
+					price.setAttribute('class', 'price');
+					title.textContent = array.maker + ' ' + array.model;
+					price.textContent = array.price;
+					
+					card.appendChild(title);
+					card.appendChild(price);
+					cards.appendChild(card);
+				}
+			}
+			
+			function onSuccess(response) {
+				document.querySelector('button').innerHTML='Loading ...';
+				document.getElementById('loading').style.display = 'inline-block';							
+				setTimeout(function(){
+					document.querySelector('button').innerHTML='Items are loaded';
+					response.json().then(onStreamProcessed);
+				}, 2500);
+			}
+			
+			function onError(error) {
+				alert(error);
+			}
+			
+			function call() {
+				if (document.querySelector('button').textContent == 'Load') {
+					fetch('http://demo4296963.mockable.io/listCars').then(onSuccess, onError);
+				}
+			}
+			
+			function sortByMaker() {
+				if (document.getElementById('cards').firstChild.nodeName == 'DIV') {
+					list.sort((a,b) => (a.maker+' '+a.model).localeCompare(b.maker+' '+b.model));
+					process(list);
+				}
+			}
+			
+			function sortByPrice(a, b) {
+				if (document.getElementById('cards').firstChild.nodeName == 'DIV') {
+					list.sort((a,b) => a.price - b.price);
+					process(list);
+				}
+			}
+			
+			document.getElementById('buttonLoad').addEventListener('click',call);
+			document.getElementById('buttonSortByMaker').addEventListener('click', sortByMaker);
+			document.getElementById('buttonSortByPrice').addEventListener('click', sortByPrice);
+		</script>
+	</body>
+</html>

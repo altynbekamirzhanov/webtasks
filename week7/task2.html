@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+		#cards .card{
+			width:278px;
+			display:flex;
+			padding: 10px;
+			border:1px solid red;
+		}
+		#cards .card .title{
+			flex-grow: 1;
+		}
+		#cards .card .price{
+			font-weight: bold;
+		}
+		#loading{
+			display: none;
+		}
+		#cards{
+			width:300px;
+			height:200px;
+			margin: 5px 0;
+			border: 1px solid blue;
+		}
+		</style>
+	</head>
+	<body>
+		<button>Load</button>
+		<div id="cards">
+			<img width="300px" height="200px" id="loading" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"/>
+		</div>
+		<script>
+			function onStreamProcessed(responses) {
+				const cards = document.getElementById('cards');
+				for (let response of responses) {
+					let card = document.createElement('div');
+					let title = document.createElement('span');
+					let price = document.createElement('span');
+					card.setAttribute('class', 'card');
+					title.setAttribute('class', 'title');
+					price.setAttribute('class', 'price');
+					title.textContent = response.maker + ' ' + response.model;
+					price.textContent = response.price;
+					
+					card.appendChild(title);
+					card.appendChild(price);
+					cards.appendChild(card);
+				}
+			}
+			
+			function onSuccess(response) {
+				document.querySelector('button').innerHTML='Loading ...';
+				document.getElementById('loading').style.display = 'inline-block';							
+				setTimeout(function(){
+					document.querySelector('button').innerHTML='Items are loaded';
+					document.getElementById('loading').style.display = 'none';
+					response.json().then(onStreamProcessed);
+				}, 2500);
+			}
+			
+			function onError(error) {
+				alert(error);
+			}
+			
+			function call() {
+				if (document.querySelector('button').textContent == 'Load') {
+					fetch('http://demo4296963.mockable.io/listCars').then(onSuccess, onError);
+				}
+			}
+			
+			document.querySelector('button').addEventListener('click',call);
+		</script>
+	</body>
+</html>

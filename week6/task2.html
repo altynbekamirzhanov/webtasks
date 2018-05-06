@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script defer>
+			let countries = ["Kazakhstan","Russia","England","France"];
+			let cities_by_country = {"Kazakhstan":["Almaty","Astana","Karagandy"],"Russia":["Moscow","Saint-Petersburg","Kazan"],"England":["London","Manchester","Liverpool"],"France":["Paris","Lyon","Marseille"]};
+			let clicked = false;
+			
+			function onClick(event) {
+				if (!clicked) {
+					let x = event.currentTarget;
+					let option1 = document.createElement("option");
+					let option2 = document.createElement("option");
+					let option3 = document.createElement("option");
+					let option4 = document.createElement("option");
+					option1.appendChild(document.createTextNode(countries[0]));
+					option2.appendChild(document.createTextNode(countries[1]));
+					option3.appendChild(document.createTextNode(countries[2]));
+					option4.appendChild(document.createTextNode(countries[3]));
+					x.innerHTML = '';
+					x.appendChild(option1);
+					x.appendChild(option2);
+					x.appendChild(option3);
+					x.appendChild(option4);
+					clicked = true;
+				}
+			}
+			function onChange(event) {
+				let x = event.currentTarget;
+				let y = document.getElementById('select2');
+				let cities = cities_by_country[x.value];
+				let option1 = document.createElement("option");
+				let option2 = document.createElement("option");
+				let option3 = document.createElement("option");
+				option1.appendChild(document.createTextNode(cities[0]));
+				option2.appendChild(document.createTextNode(cities[1]));
+				option3.appendChild(document.createTextNode(cities[2]));
+				y.innerHTML = '';
+				y.appendChild(option1);
+				y.appendChild(option2);
+				y.appendChild(option3);
+			}
+		</script>
+	</head>
+	<body>
+		<select id="select1" onClick="onClick(event)" onChange="onChange(event)">
+			<option>Select country</option>
+		</select>
+		<select id="select2">
+			<option>Select city</option>
+		</select>
+	</body>
+</html>
