@@ -1,7 +1,7 @@
 <form>
 	<?php
 		if (isset($_REQUEST["username"]) && isset($_REQUEST["password"])) {
-			$conn = mysqli_connect("localhost", "admin", "admin", "task11");
+			$conn = mysqli_connect("localhost", "root", "", "table");
 			$result = mysqli_query($conn, "SELECT * FROM email");
 			$rows = mysqli_num_rows($result);
 			
