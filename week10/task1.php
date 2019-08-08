@@ -38,7 +38,7 @@
 	<body>
 		<div class="cards">
 			<?php
-				$conn = mysqli_connect("localhost", "admin", "admin");
+				$conn = mysqli_connect("localhost", "root", "");
 				mysqli_select_db($conn, "table");
 				$sql = "SELECT * FROM cars, makers WHERE cars.maker_id=makers.id";
 				$result = mysqli_query($conn, $sql);
