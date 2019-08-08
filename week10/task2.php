@@ -51,19 +51,19 @@
 		<div class="cards">
 			<?php
 				if (isset($_REQUEST["cars"])) {
-					$conn = mysqli_connect("localhost", "admin", "admin");
+					$conn = mysqli_connect("localhost", "root", "");
 					mysqli_select_db($conn, "table");
 					$result;
 					if ($_REQUEST["cars"] == "All")
-						$result = mysqli_query($conn, "SELECT makers.title, cars.model, cars.year, cars.price, cars.img FROM cars JOIN makers ON cars.maker_id=makers.id");
+						$result = mysqli_query($conn, "SELECT makers.maker, cars.model, cars.year, cars.price, cars.img FROM cars JOIN makers ON cars.maker_id=makers.id");
 					else
-						$result = mysqli_query($conn, "SELECT makers.title, cars.model, cars.year, cars.price, cars.img FROM cars JOIN makers ON cars.maker_id=makers.id WHERE makers.title='".$_REQUEST["cars"]."'");
+						$result = mysqli_query($conn, "SELECT makers.maker, cars.model, cars.year, cars.price, cars.img FROM cars JOIN makers ON cars.maker_id=makers.id WHERE makers.maker='".$_REQUEST["cars"]."'");
 					$rows = mysqli_num_rows($result);
 					for ($i=0; $i<$rows; $i++) {
 						$row = mysqli_fetch_assoc($result);
 						echo "<div class=\"card\"><img src=\"" . $row["img"] . "\"/>" .
 								"<section class=\"description\">
-									<span class=\"title\">" . $row["title"]." ".$row["model"] ."</span>
+									<span class=\"title\">" . $row["maker"]." ".$row["model"] ."</span>
 									<span class=\"year\">Year:<span class=\"bold\">" . $row["year"] . "</span></span>
 									<span class=\"price\">Price:<span class=\"bold\">" . $row["price"] . "$</span></span>
 								</section>
